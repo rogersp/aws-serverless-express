@@ -78,6 +78,8 @@ function forwardResponseToApiGateway(server, response, context) {
                 isBase64Encoded = false
             }
 
+            // Removing "transfer-encoding" header is necessary for GraphQL & GraphiQL to work
+            delete headers["transfer-encoding"];
             const successResponse = {statusCode, body, headers, isBase64Encoded}
 
             context.succeed(successResponse)
